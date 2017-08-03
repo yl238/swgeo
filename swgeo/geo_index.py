@@ -12,9 +12,9 @@ class GeoIndex(object):
 
     def __repr__(self):
         return "GeoIndex({}, {}, {}, {})".format(self.geo_index,
-                                         self.latitude,
-                                         self.longitude,
-                                         self.decimal)
+                                                 self.latitude,
+                                                 self.longitude,
+                                                 self.decimal)
 
     @classmethod
     def from_latlon(cls, latitude, longitude, decimal=4):
@@ -64,7 +64,7 @@ class GeoIndex(object):
     def plot_folium(self, map, **kwargs):
         d = 10 ** -self.decimal / 2
         lats = [self.latitude - d, self.latitude + d, self.latitude + d, self.latitude - d, self.latitude - d]
-        lons = [self.longitude- d, self.longitude - d, self.longitude + d, self.longitude + d, self.longitude - d]
+        lons = [self.longitude - d, self.longitude - d, self.longitude + d, self.longitude + d, self.longitude - d]
         coords = zip(lats, lons)
         geoindex_box = folium.PolyLine(locations=coords, **kwargs)
         map.add_child(geoindex_box)
@@ -78,9 +78,9 @@ class GeoIndex(object):
     def get_neighbours(self, m=3, n=3):
         """Get the list of geo_indices neighbouring the specified geoindex"""
         neighbour_geo_indices = []
-        for ilat in range(-n, n+1):
-            for ilon in range(-m, m+1):
-                new_latitude = self.latitude + ilat * 10 **-self.decimal
+        for ilat in range(-n, n + 1):
+            for ilon in range(-m, m + 1):
+                new_latitude = self.latitude + ilat * 10 ** -self.decimal
                 new_longitude = self.longitude + ilon * 10 ** -self.decimal
                 new_geoindex = self.from_latlon(new_latitude, new_longitude, self.decimal)
                 neighbour_geo_indices.append(new_geoindex)
