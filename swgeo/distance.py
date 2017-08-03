@@ -1,4 +1,6 @@
 import numpy as np
+
+
 def haversine(lon1, lat1, lon2, lat2):
     """
     Calculate the great circle distance between two points
@@ -25,3 +27,22 @@ def haversine(lon1, lat1, lon2, lat2):
     c = 2 * np.arcsin(np.sqrt(a))
     r = 6371000  # Radius of earth in meters. Use 3956 for miles
     return c * r
+
+
+def path_loss(r, r0, n):
+    """
+    Given RSS values, calculate an approximate distance in 2-D Cartesian coordinates
+    using the log-normal shadowing model.
+
+    Parameters
+    ----------
+    r: float or Numpy array, RSS in dBm
+    r0: float, RSS at the reference distance (d0, typically 1m)
+    n: float, PL exponent parameter
+
+    Returns
+    -------
+    float, PL distance in meters in 2-D Cartesian coordinates.
+    """
+    exponent = (r0 - r) / (10 * n)
+    return 10 ** exponent
