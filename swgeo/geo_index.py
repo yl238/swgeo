@@ -11,7 +11,7 @@ class GeoIndex(object):
         self.decimal = decimal
 
     def __repr__(self):
-        return "({}, {}, {}, {})".format(self.geo_index,
+        return "GeoIndex({}, {}, {}, {})".format(self.geo_index,
                                          self.latitude,
                                          self.longitude,
                                          self.decimal)
